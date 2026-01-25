@@ -20,36 +20,33 @@ char **lire_mots(int n)
     }
     return ptr;
 }
+void swap(char **s1,char **s2)
+{
+    char **tmp = s1;
+    s1 = s2;
+    s
+
+
+}
 
 void triermots (char** mots,int n)
 {
-    char *max;
-    char *str;
-    char *tmp = (char*) malloc(50);
+    char ***max;
+    char ***str;
+    int p;
 
-    if (!tmp)
-        return ; 
     for (int i = 0; i < n; i++)
     {
-        max = (char*) malloc(50);
-        if (!max)
-            return ;
-        max = mots[i];
-        for(int j = 0; j < n; j++)
+        max = &mots[i];
+        for(int j = i + 1; j < n; j++)
         {
-            str = mots[j];
-            if(strcmp(max,str) < 0)
-            {
-                tmp = max;
-                max = str;
-                str = max;
-                break;
-            }
-            else
-            str = mots[j];
+            str = &mots[j];
+            p = strcmp(**max,**str);
+            if (p < 0)
+                max = &mots[j];
+            
         }
-        mots[i] = max;
-
+        mots[i] = *max;
     }
 
 }
@@ -58,7 +55,7 @@ void affiche(char **str, int n)
     int i = 0;
     while (i < n)
     {
-        printf("%s",*str[i]);
+        printf("%s",str[i]);
         i++;
     } 
 }
@@ -66,7 +63,7 @@ void affiche(char **str, int n)
 int main ()
 {
     char **str = lire_mots(2);
-    triermots(str,2);
+    // triermots(str,2);
     affiche(str,2);
     free(str);
 
